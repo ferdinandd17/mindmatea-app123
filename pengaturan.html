@@ -193,7 +193,30 @@
             <a href="komunitas.html" class="nav-item"><i class="fas fa-users"></i><span>Forum</span></a>
             <a href="profil.html" class="nav-item active"><i class="fas fa-user"></i><span>Profil</span></a>
         </nav>
+        <style>
+  /* Trik "Magic" CSS: Jika checkbox dicentang, balikkan warna seluruh body */
+  body:has(#darkModeToggle:checked) {
+      filter: invert(1) hue-rotate(180deg);
+  }
+
+  /* Supaya gambar/ikon tidak ikutan aneh warnanya, kita balikkan lagi */
+  body:has(#darkModeToggle:checked) img, 
+  body:has(#darkModeToggle:checked) i {
+      filter: invert(1) hue-rotate(180deg);
+  }
+</style>
+
+<div class="setting-item">
+    <div class="setting-info">
+        <i class="fas fa-moon"></i>
+        <span class="setting-label">Mode Malam (CSS Only)</span>
     </div>
+    <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider"></span>
+    </label>
+</div>
 
 </body>
+
 </html>
