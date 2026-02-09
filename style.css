@@ -269,7 +269,38 @@ body {
 .mood-btn:hover { transform: scale(1.1); background: var(--light-gray); }
 .mood-btn.selected { border-color: var(--primary); background: rgba(108, 99, 255, 0.1); }
 
+/* Style khusus saat Dark Mode aktif */
+body.dark-mode {
+    background-color: #000; /* Background monitor jadi hitam pekat */
+}
+
+body.dark-mode .phone-frame {
+    background-color: #1a1a1a; /* Dalam HP jadi gelap */
+    color: #ffffff;
+}
+
+body.dark-mode .top-bar, 
+body.dark-mode .bottom-nav,
+body.dark-mode .setting-item,
+body.dark-mode .feature-card,
+body.dark-mode .post-card,
+body.dark-mode .history-item {
+    background-color: #2d2d2d;
+    color: #ffffff;
+    border-color: #444;
+}
+
+body.dark-mode .setting-label, 
+body.dark-mode h4, 
+body.dark-mode h5 {
+    color: #ffffff;
+}
+
+body.dark-mode p {
+    color: #bbb;
+}
 /* 10. TYPOGRAPHY HELPERS */
 h1, h2, h3 { font-family: 'Poppins', sans-serif; color: var(--dark); font-weight: 700; }
 p { color: var(--gray); font-size: 14px; line-height: 1.6; }
+
 .text-white { color: var(--white) !important; }
