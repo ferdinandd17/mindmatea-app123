@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMate - Mood Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .mood-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .mood-option {
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 15px 5px;
+            font-size: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .mood-option span { font-size: 10px; color: var(--gray); font-weight: 600; }
+
+        .mood-option.selected {
+            border-color: var(--primary);
+            background: rgba(108, 99, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .journal-input {
+            width: 100%;
+            border: none;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            font-family: inherit;
+            resize: none;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .save-btn {
+            width: 100%;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+        }
+
+        .history-item {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: slideUp 0.5s ease;
+        }
+
+        .history-emoji { font-size: 24px; }
+        .history-info h6 { margin: 0; font-size: 14px; }
+        .history-info p { margin: 0; font-size: 11px; }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="top-bar">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h5 style="margin: 0;">Mood Tracker</h5>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div class="content">
+            <h4 style="margin-top: 10px;">Bagaimana perasaanmu?</h4>
+            <p>Pilih salah satu yang paling menggambarkanmu saat ini.</p>
+
+            <div class="mood-selector">
+                <div class="mood-option" onclick="selectMood(this, 'Senang', '😊')">😊<span>Senang</span></div>
+                <div class="mood-option" onclick="selectMood(this, 'Biasa', '😐')">😐<span>Biasa</span></div>
+                <div class="mood-option" onclick="selectMood(this, 'Sedih', '😔')">😔<span>Sedih</span></div>
+                <div class="mood-option" onclick="selectMood(this, 'Marah', '😡')">😡<span>Marah</span></div>
+            </div>
+
+            <textarea id="moodNote" class="journal-input" rows="3" placeholder="Apa yang membuatmu merasakannya? (Opsional)"></textarea>
+
+            <button class="save-btn" onclick="saveMood()">Simpan Mood Hari Ini</button>
+
+            <h4 style="margin: 30px 0 15px;">Riwayat Mood</h4>
+            <div id="moodHistory">
+                </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="chat.html" class="nav-item"><i class="fas fa-comment-dots"></i><span>Chat</span></a>
+            <a href="relax.html" class="nav-item"><i class="fas fa-spa"></i><span>Relax</span></a>
+            <a href="komunitas.html" class="nav-item"><i class="fas fa-users"></i><span>Forum</span></a>
+            <a href="profil.html" class="nav-item"><i class="fas fa-user"></i><span>Profil</span></a>
+        </nav>
+    </div>
+
+    <script>
+        let selectedMoodData = null;
+
+        function selectMood(element, label, emoji) {
+            document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedMoodData = { label, emoji };
+        }
+
+        function saveMood() {
+            const note = document.getElementById('moodNote').value;
+            const historyContainer = document.getElementById('moodHistory');
+
+            if (!selectedMoodData) {
+                alert("Pilih mood kamu dulu ya!");
+                return;
+            }
+
+            const now = new Date();
+            const timeString = now.getHours() + ":" + now.getMinutes().toString().padStart(2, '0');
+            const dateString = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
+
+            const newItem = `
+                <div class="history-item">
+                    <div class="history-emoji">${selectedMoodData.emoji}</div>
+                    <div class="history-info">
+                        <h6>Merasa ${selectedMoodData.label}</h6>
+                        <p>${note || 'Tidak ada catatan'}</p>
+                        <span style="font-size: 9px; color: var(--primary);">${dateString}, ${timeString}</span>
+                    </div>
+                </div>
+            `;
+
+            historyContainer.insertAdjacentHTML('afterbegin', newItem);
+
+            // Reset input
+            document.getElementById('moodNote').value = "";
+            document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('selected'));
+            selectedMoodData = null;
+        }
+    </script>
+</body>
+</html>

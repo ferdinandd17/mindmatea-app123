@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMate - Notifikasi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .notif-section { padding: 0 20px; }
+        
+        .notif-card {
+            background: white;
+            padding: 15px;
+            border-radius: 18px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 15px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .notif-card.unread {
+            background: rgba(108, 99, 255, 0.03);
+            border-left: 4px solid var(--primary);
+        }
+
+        .notif-icon {
+            width: 45px; height: 45px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .notif-content h6 { margin: 0 0 4px 0; font-size: 13px; color: var(--dark); }
+        .notif-content p { margin: 0; font-size: 11px; color: var(--gray); line-height: 1.4; }
+        .notif-time { font-size: 9px; color: var(--primary); margin-top: 8px; display: block; font-weight: 600; }
+
+        .btn-clear {
+            font-size: 12px;
+            color: var(--secondary);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            display: none; /* Muncul jika notif dihapus */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="top-bar">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h5 style="margin: 0;">Notifikasi</h5>
+            <button class="btn-clear" onclick="clearAll()">Hapus Semua</button>
+        </div>
+
+        <div class="content">
+            <div class="notif-section" id="notifList">
+                
+                <p style="font-size: 12px; font-weight: 700; margin: 20px 0 10px;">Terbaru</p>
+
+                <div class="notif-card unread">
+                    <div class="notif-icon" style="background: rgba(108, 99, 255, 0.1); color: var(--primary);">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="notif-content">
+                        <h6>Waktunya Relaksasi!</h6>
+                        <p>Sudah 4 jam kamu bekerja. Tarik napas sejenak yuk bersama Senara.</p>
+                        <span class="notif-time">Baru saja</span>
+                    </div>
+                </div>
+
+                <div class="notif-card unread">
+                    <div class="notif-icon" style="background: rgba(255, 101, 132, 0.1); color: var(--secondary);">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="notif-content">
+                        <h6>Pesan dari Forum</h6>
+                        <p>Seseorang baru saja menyukai cerita anonim kamu di komunitas.</p>
+                        <span class="notif-time">10 menit yang lalu</span>
+                    </div>
+                </div>
+
+                <p style="font-size: 12px; font-weight: 700; margin: 25px 0 10px;">Sebelumnya</p>
+
+                <div class="notif-card">
+                    <div class="notif-icon" style="background: rgba(54, 209, 220, 0.1); color: var(--accent);">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="notif-content">
+                        <h6>Lengkapi Jurnalmu</h6>
+                        <p>Kemarin kamu tidak mencatat jurnal. Ceritakan yuk bagaimana perasaanmu kemarin.</p>
+                        <span class="notif-time">Kemarin, 20:00</span>
+                    </div>
+                </div>
+
+                <div class="notif-card">
+                    <div class="notif-icon" style="background: rgba(76, 175, 80, 0.1); color: var(--success);">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="notif-content">
+                        <h6>Minggu yang Luar Biasa!</h6>
+                        <p>Selamat! Kamu sudah menyelesaikan 5 sesi meditasi minggu ini.</p>
+                        <span class="notif-time">2 hari yang lalu</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="emptyState" class="empty-state">
+                <i class="fas fa-bell-slash" style="font-size: 50px; color: var(--light-gray); margin-bottom: 15px;"></i>
+                <h5>Tidak ada notifikasi</h5>
+                <p>Kamu sudah membaca semua pesan.</p>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="chat.html" class="nav-item"><i class="fas fa-comment-dots"></i><span>Chat</span></a>
+            <a href="relax.html" class="nav-item"><i class="fas fa-spa"></i><span>Relax</span></a>
+            <a href="komunitas.html" class="nav-item"><i class="fas fa-users"></i><span>Forum</span></a>
+            <a href="profil.html" class="nav-item"><i class="fas fa-user"></i><span>Profil</span></a>
+        </nav>
+    </div>
+
+    <script>
+        function clearAll() {
+            if(confirm('Hapus semua notifikasi?')) {
+                document.getElementById('notifList').style.display = 'none';
+                document.getElementById('emptyState').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

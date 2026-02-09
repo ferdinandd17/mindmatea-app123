@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMate - Pengaturan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .setting-section {
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .setting-item {
+            background: white;
+            padding: 15px 18px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .setting-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .setting-info i {
+            width: 35px;
+            height: 35px;
+            background: rgba(108, 99, 255, 0.05);
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .setting-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        /* Styling Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 45px;
+            height: 24px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background: var(--gradient); }
+        input:checked + .slider:before { transform: translateX(21px); }
+
+        .version-text {
+            text-align: center;
+            font-size: 11px;
+            color: var(--gray);
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="top-bar">
+            <a href="profil.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h5 style="margin: 0;">Pengaturan</h5>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div class="content">
+            
+            <div class="setting-section" style="margin-top: 20px;">
+                <span class="section-title">Akun & Keamanan</span>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <i class="fas fa-lock"></i>
+                        <span class="setting-label">Ubah Kata Sandi</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:#ddd; font-size:12px;"></i>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <i class="fas fa-globe"></i>
+                        <span class="setting-label">Bahasa</span>
+                    </div>
+                    <span style="font-size: 12px; color: var(--primary); font-weight: 600;">Indonesia</span>
+                </div>
+            </div>
+
+            <div class="setting-section">
+                <span class="section-title">Preferensi</span>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <i class="fas fa-moon"></i>
+                        <span class="setting-label">Mode Malam</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <i class="fas fa-bell"></i>
+                        <span class="setting-label">Notifikasi Push</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <i class="fas fa-fingerprint"></i>
+                        <span class="setting-label">Kunci Aplikasi</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="setting-section">
+                <span class="section-title">Lainnya</span>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <i class="fas fa-star" style="color: var(--warning);"></i>
+                        <span class="setting-label">Beri Rating</span>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="setting-label">Tentang MindMate</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="version-text">MindMate v1.0.4 <br> Made with ❤️ for Mental Health</p>
+
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="chat.html" class="nav-item"><i class="fas fa-comment-dots"></i><span>Chat</span></a>
+            <a href="relax.html" class="nav-item"><i class="fas fa-spa"></i><span>Relax</span></a>
+            <a href="komunitas.html" class="nav-item"><i class="fas fa-users"></i><span>Forum</span></a>
+            <a href="profil.html" class="nav-item active"><i class="fas fa-user"></i><span>Profil</span></a>
+        </nav>
+    </div>
+
+</body>
+</html>

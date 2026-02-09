@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Senara AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Gaya khusus tambahan untuk halaman chat */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+            background: #fdfdfd;
+        }
+
+        .typing-indicator {
+            font-size: 11px;
+            color: var(--gray);
+            margin-bottom: 10px;
+            display: none;
+            font-style: italic;
+        }
+
+        .input-bar {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: absolute;
+            bottom: 70px; /* Di atas bottom nav */
+            width: 100%;
+        }
+
+        .input-bar input {
+            flex: 1;
+            border: none;
+            background: var(--light-gray);
+            padding: 12px 20px;
+            border-radius: 25px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .send-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .send-btn:active { transform: scale(0.9); }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="top-bar">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <div style="text-align: center;">
+                <h5 style="margin: 0;">Senara AI</h5>
+                <span style="font-size: 10px; color: var(--success);"><i class="fas fa-circle" style="font-size: 8px;"></i> Online</span>
+            </div>
+            <div style="width: 40px;"></div> </div>
+
+        <div class="chat-container" id="chatBox">
+            <div class="msg bot-msg">
+                Halo! Aku Senara. Aku di sini untuk mendengarkan apa pun yang ingin kamu ceritakan. Bagaimana perasaanmu sekarang?
+            </div>
+        </div>
+
+        <div id="typing" class="typing-indicator" style="padding-left: 20px;">Senara sedang mengetik...</div>
+
+        <div class="input-bar">
+            <input type="text" id="userInput" placeholder="Ceritakan sesuatu..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home"></i><span>Home</span>
+            </a>
+            <a href="chat.html" class="nav-item active">
+                <i class="fas fa-comment-dots"></i><span>Chat</span>
+            </a>
+            <a href="relax.html" class="nav-item">
+                <i class="fas fa-spa"></i><span>Relax</span>
+            </a>
+            <a href="komunitas.html" class="nav-item">
+                <i class="fas fa-users"></i><span>Forum</span>
+            </a>
+            <a href="profil.html" class="nav-item">
+                <i class="fas fa-user"></i><span>Profil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chatBox');
+        const userInput = document.getElementById('userInput');
+        const typingIndicator = document.getElementById('typing');
+
+        // Database Jawaban Senara (Sangat banyak & Pintar)
+        const brain = {
+            "halo": ["Halo juga! Senang melihatmu di sini.", "Hai! Apa yang bisa Senara bantu hari ini?", "Halo! Bagaimana harimu?"],
+            "sedih": ["Aku mengerti rasanya... Gak apa-apa kok kalau mau sedih. Ceritain yuk kenapa?", "Peluk jauh untukmu. Senara di sini dengerin kamu.", "Jangan dipendam sendiri ya, Senara siap mendengarkan."],
+            "stres": ["Stres itu manusiawi, tarik napas dalam-dalam dulu yuk.", "Banyak tekanan ya? Coba istirahat sejenak, kamu sudah berusaha keras hari ini.", "Ayo coba fitur Relaksasi Napas setelah ini agar lebih tenang."],
+            "capek": ["Lelah itu tanda kamu sudah berjuang hebat. Istirahat ya?", "Kamu berhak istirahat. Mau cerita apa yang bikin kamu paling lelah?", "Jangan lupa minum air dan rebahan sebentar. Kamu berharga."],
+            "senang": ["Wah, Senara ikut senang dengarnya! Ceritain dong apa yang bikin bahagia?", "Kabar yang luar biasa! Pertahankan energi positif ini ya.", "Yey! Terima kasih sudah berbagi kebahagiaan dengan Senara."],
+            "terima kasih": ["Sama-sama! Senara selalu ada buat kamu.", "Senang bisa membantu.", "Apapun untukmu!"],
+            "default": ["Aku mengerti. Ceritakan lebih lanjut, Senara mendengarkan...", "Terima kasih sudah berbagi perasaanmu.", "Setiap perasaanmu itu valid. Apa lagi yang kamu rasakan?", "Aku di sini untukmu. Jangan ragu buat cerita apa aja."]
+        };
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const text = userInput.value.trim().toLowerCase();
+            if (text === "") return;
+
+            // Tambahkan pesan user ke layar
+            appendMessage(userInput.value, 'user-msg');
+            userInput.value = "";
+
+            // Efek mengetik AI
+            typingIndicator.style.display = "block";
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                typingIndicator.style.display = "none";
+                let response;
+
+                // Logika deteksi kata kunci
+                if (text.includes("sedih") || text.includes("nangis") || text.includes("buruk")) {
+                    response = brain.sedih[Math.floor(Math.random() * brain.sedih.length)];
+                } else if (text.includes("stres") || text.includes("tekanan") || text.includes("pusing")) {
+                    response = brain.stres[Math.floor(Math.random() * brain.stres.length)];
+                } else if (text.includes("capek") || text.includes("lelah") || text.includes("malas")) {
+                    response = brain.capek[Math.floor(Math.random() * brain.capek.length)];
+                } else if (text.includes("senang") || text.includes("bahagia") || text.includes("mantap")) {
+                    response = brain.senang[Math.floor(Math.random() * brain.senang.length)];
+                } else if (brain[text]) {
+                    response = brain[text][Math.floor(Math.random() * brain[text].length)];
+                } else {
+                    response = brain.default[Math.floor(Math.random() * brain.default.length)];
+                }
+
+                appendMessage(response, 'bot-msg');
+            }, 1500); // Delay 1.5 detik biar kerasa mikir
+        }
+
+        function appendMessage(msg, className) {
+            const div = document.createElement('div');
+            div.className = `msg ${className}`;
+            div.innerText = msg;
+            chatBox.appendChild(div);
+            
+            // Auto scroll ke bawah
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>

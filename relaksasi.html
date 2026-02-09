@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMate - Relaksasi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Gaya khusus untuk halaman relaksasi */
+        .relax-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .instruction-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 40px;
+            height: 30px; /* Menjaga posisi teks agar tidak goyang */
+            transition: var(--transition);
+        }
+
+        /* Lingkaran luar (efek bayangan halus) */
+        .circle-outer {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(108, 99, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Lingkaran pernapasan utama */
+        .breathe-circle {
+            width: 160px;
+            height: 160px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 0 40px rgba(108, 99, 255, 0.3);
+            animation: breatheAnimation 8s infinite ease-in-out;
+            z-index: 2;
+        }
+
+        .circle-inner-icon {
+            font-size: 40px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+        }
+
+        /* Animasi Pernapasan */
+        @keyframes breatheAnimation {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 20px rgba(108, 99, 255, 0.2);
+            }
+            50% { 
+                transform: scale(1.6); 
+                box-shadow: 0 0 60px rgba(54, 209, 220, 0.5);
+            }
+        }
+
+        .tip-card {
+            margin-top: 60px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="top-bar">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h5 style="margin: 0;">Relaksasi</h5>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div class="content">
+            <div class="relax-wrapper">
+                <div id="text-guide" class="instruction-text">Tarik Napas...</div>
+
+                <div class="circle-outer">
+                    <div class="breathe-circle">
+                        <i class="fas fa-leaf circle-inner-icon"></i>
+                    </div>
+                </div>
+
+                <div class="tip-card">
+                    <p style="margin-bottom: 5px; font-weight: 600; color: var(--dark);">Tips:</p>
+                    <p style="font-size: 12px; color: var(--gray);">Cari posisi duduk yang nyaman, pejamkan mata, dan ikuti ritme lingkaran di atas.</p>
+                </div>
+
+                <button onclick="window.location.href='index.html'" style="margin-top: 30px; border: none; background: none; color: var(--gray); font-size: 14px; text-decoration: underline; cursor: pointer;">
+                    Selesai
+                </button>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home"></i><span>Home</span>
+            </a>
+            <a href="chat.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i><span>Chat</span>
+            </a>
+            <a href="relax.html" class="nav-item active">
+                <i class="fas fa-spa"></i><span>Relax</span>
+            </a>
+            <a href="komunitas.html" class="nav-item">
+                <i class="fas fa-users"></i><span>Forum</span>
+            </a>
+            <a href="profil.html" class="nav-item">
+                <i class="fas fa-user"></i><span>Profil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        const textGuide = document.getElementById('text-guide');
+        
+        // Fungsi untuk mengubah teks sesuai durasi animasi (8 detik total: 4 detik naik, 4 detik turun)
+        function updateText() {
+            textGuide.innerText = "Tarik Napas...";
+            textGuide.style.color = "#6C63FF";
+            
+            setTimeout(() => {
+                textGuide.innerText = "Hembuskan...";
+                textGuide.style.color = "#36D1DC";
+            }, 4000); // Berganti setelah 4 detik
+        }
+
+        // Jalankan fungsi setiap 8 detik
+        updateText();
+        setInterval(updateText, 8000);
+    </script>
+</body>
+</html>

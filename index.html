@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMate - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="top-bar">
+            <div class="user-info" style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 45px; height: 45px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h5 style="margin: 0; font-size: 14px;">Halo, Hebat!</h5>
+                    <p style="margin: 0; font-size: 11px; color: var(--gray);">Senin, 9 Feb 2026</p>
+                </div>
+            </div>
+            <a href="notifikasi.html" class="back-btn" style="background: none; font-size: 20px;">
+                <i class="fas fa-bell"></i>
+            </a>
+        </div>
+
+        <div class="content">
+            
+            <div class="card-gradient">
+                <h2 class="text-white" style="margin-bottom: 5px;">MindMate</h2>
+                <p class="text-white" style="opacity: 0.9;">"Pikiran sehat, hidup lebih bermakna. Apa yang kamu rasakan?"</p>
+                <div style="margin-top: 15px;">
+                    <a href="mood.html" style="background: white; color: var(--primary); padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: 600;">
+                        Catat Mood <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div style="padding: 0 5px;">
+                <h4 style="margin-bottom: 15px;">Mood Hari Ini</h4>
+                <div class="mood-grid">
+                    <button class="mood-btn">😊</button>
+                    <button class="mood-btn">😐</button>
+                    <button class="mood-btn">😔</button>
+                    <button class="mood-btn">😡</button>
+                </div>
+            </div>
+
+            <h4 style="margin: 25px 5px 15px;">Eksplorasi Fitur</h4>
+
+            <a href="chat.html" class="feature-card">
+                <div class="icon-box"><i class="fas fa-robot"></i></div>
+                <div style="flex: 1;">
+                    <h5 style="margin-bottom: 2px;">Senara AI</h5>
+                    <p style="font-size: 11px;">Teman curhat virtual 24/7</p>
+                </div>
+                <i class="fas fa-chevron-right" style="color: var(--light-gray);"></i>
+            </a>
+
+            <a href="relax.html" class="feature-card">
+                <div class="icon-box" style="color: var(--accent);"><i class="fas fa-spa"></i></div>
+                <div style="flex: 1;">
+                    <h5 style="margin-bottom: 2px;">Relaksasi Napas</h5>
+                    <p style="font-size: 11px;">Tenangkan dirimu dalam 1 menit</p>
+                </div>
+                <i class="fas fa-chevron-right" style="color: var(--light-gray);"></i>
+            </a>
+
+            <a href="journal.html" class="feature-card">
+                <div class="icon-box" style="color: var(--secondary);"><i class="fas fa-book-heart"></i></div>
+                <div style="flex: 1;">
+                    <h5 style="margin-bottom: 2px;">Jurnal Harian</h5>
+                    <p style="font-size: 11px;">Tuliskan semua keluh kesahmu</p>
+                </div>
+                <i class="fas fa-chevron-right" style="color: var(--light-gray);"></i>
+            </a>
+
+            <a href="edukasi.html" class="feature-card">
+                <div class="icon-box" style="color: var(--success);"><i class="fas fa-graduation-cap"></i></div>
+                <div style="flex: 1;">
+                    <h5 style="margin-bottom: 2px;">Edukasi Mental</h5>
+                    <p style="font-size: 11px;">Artikel & Tips kesehatan mental</p>
+                </div>
+                <i class="fas fa-chevron-right" style="color: var(--light-gray);"></i>
+            </a>
+
+            <div style="background: rgba(108, 99, 255, 0.05); padding: 20px; border-radius: 20px; border: 1px dashed var(--primary); margin: 20px 0; text-align: center;">
+                <p style="color: var(--primary); font-size: 12px;">Punya pertanyaan mendesak?</p>
+                <a href="chat.html" style="font-weight: 600; color: var(--primary); text-decoration: none;">Tanya Senara Sekarang <i class="fas fa-paper-plane"></i></a>
+            </div>
+
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="chat.html" class="nav-item">
+                <i class="fas fa-comment-dots"></i>
+                <span>Chat</span>
+            </a>
+            <a href="relax.html" class="nav-item">
+                <i class="fas fa-spa"></i>
+                <span>Relax</span>
+            </a>
+            <a href="komunitas.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Forum</span>
+            </a>
+            <a href="profil.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        document.querySelectorAll('.mood-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>

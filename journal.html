@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMate - Jurnal Pribadi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .journal-container {
+            padding: 20px;
+        }
+
+        .date-header {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Desain area tulis seperti kertas */
+        .journal-paper {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: var(--shadow-soft);
+            background-image: linear-gradient(#f1f1f1 1px, transparent 1px);
+            background-size: 100% 30px;
+            line-height: 30px;
+            min-height: 250px;
+            border: none;
+            width: 100%;
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            color: var(--dark);
+            outline: none;
+            resize: none;
+        }
+
+        .save-action {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-save {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-save:active { transform: scale(0.9); }
+
+        /* Daftar jurnal yang tersimpan */
+        .saved-list {
+            margin-top: 40px;
+        }
+
+        .journal-card {
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--primary);
+            animation: slideUp 0.5s ease;
+        }
+
+        .journal-card h6 { margin: 0 0 5px 0; font-size: 14px; color: var(--dark); }
+        .journal-card p { 
+            margin: 0; 
+            font-size: 12px; 
+            color: var(--gray);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="top-bar">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h5 style="margin: 0;">Jurnal Harian</h5>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div class="content">
+            <div class="journal-container">
+                <div class="date-header">
+                    <i class="fas fa-calendar-day"></i>
+                    <span id="currentDate"></span>
+                </div>
+                
+                <h3 style="margin-bottom: 15px;">Apa ceritamu hari ini?</h3>
+                
+                <textarea id="journalText" class="journal-paper" placeholder="Mulai menulis di sini..."></textarea>
+
+                <div class="save-action">
+                    <button id="saveBtn" class="btn-save" onclick="saveEntry()">
+                        Simpan Jurnal <i class="fas fa-check"></i>
+                    </button>
+                </div>
+
+                <div class="saved-list">
+                    <h5 style="margin-bottom: 15px;">Jurnal Sebelumnya</h5>
+                    <div id="entriesContainer">
+                        <div class="journal-card">
+                            <h6>Pikiran di pagi hari</h6>
+                            <p>Tadi pagi merasa sangat tenang setelah meditasi 5 menit...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="chat.html" class="nav-item"><i class="fas fa-comment-dots"></i><span>Chat</span></a>
+            <a href="relax.html" class="nav-item"><i class="fas fa-spa"></i><span>Relax</span></a>
+            <a href="komunitas.html" class="nav-item"><i class="fas fa-users"></i><span>Forum</span></a>
+            <a href="profil.html" class="nav-item"><i class="fas fa-user"></i><span>Profil</span></a>
+        </nav>
+    </div>
+
+    <script>
+        // Set tanggal hari ini
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').innerText = new Date().toLocaleDateString('id-ID', options);
+
+        function saveEntry() {
+            const text = document.getElementById('journalText').value;
+            const container = document.getElementById('entriesContainer');
+            const saveBtn = document.getElementById('saveBtn');
+
+            if (!text.trim()) {
+                alert("Tulis sesuatu dulu ya!");
+                return;
+            }
+
+            // Efek Loading
+            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
+            saveBtn.disabled = true;
+
+            setTimeout(() => {
+                const title = text.split(' ').slice(0, 3).join(' ') + '...';
+                const newCard = `
+                    <div class="journal-card">
+                        <h6>${title}</h6>
+                        <p>${text}</p>
+                    </div>
+                `;
+
+                container.insertAdjacentHTML('afterbegin', newCard);
+                
+                // Reset
+                document.getElementById('journalText').value = "";
+                saveBtn.innerHTML = 'Simpan Jurnal <i class="fas fa-check"></i>';
+                saveBtn.disabled = false;
+                
+                alert("Jurnal kamu berhasil disimpan dengan aman.");
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

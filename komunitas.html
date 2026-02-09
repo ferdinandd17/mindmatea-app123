@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMate - Komunitas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .community-header {
+            padding: 20px;
+            background: var(--white);
+        }
+
+        .category-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 20px;
+            scrollbar-width: none;
+        }
+        .category-scroll::-webkit-scrollbar { display: none; }
+
+        .cat-pill {
+            padding: 8px 18px;
+            background: var(--white);
+            border-radius: 20px;
+            font-size: 12px;
+            white-space: nowrap;
+            color: var(--gray);
+            box-shadow: var(--shadow-soft);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cat-pill.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Styling Post Card */
+        .post-card {
+            background: white;
+            margin: 15px 20px;
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-soft);
+            animation: slideUp 0.6s ease;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .avatar-anon {
+            width: 35px; height: 35px;
+            background: #eee;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gray);
+        }
+
+        .post-content { font-size: 13px; line-height: 1.6; color: var(--dark); }
+
+        .post-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f5f5f5;
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .action-item { cursor: pointer; transition: 0.2s; }
+        .action-item:hover { color: var(--primary); }
+
+        /* Floating Button */
+        .fab {
+            position: absolute;
+            bottom: 90px;
+            right: 20px;
+            width: 55px; height: 55px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.4);
+            cursor: pointer;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="top-bar">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h5 style="margin: 0;">Forum Komunitas</h5>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div class="category-scroll">
+            <div class="cat-pill active">Semua</div>
+            <div class="cat-pill">Curhat</div>
+            <div class="cat-pill">Motivasi</div>
+            <div class="cat-pill">Tips</div>
+            <div class="cat-pill">Tanya Pakar</div>
+        </div>
+
+        <div class="content">
+            <p style="padding: 10px 20px; font-size: 11px; color: var(--success);">
+                <i class="fas fa-circle" style="font-size: 8px;"></i> 1.240 anggota sedang berbagi cerita
+            </p>
+
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="avatar-anon"><i class="fas fa-user-secret"></i></div>
+                    <div>
+                        <h6 style="margin:0; font-size:12px;">Anonim #241</h6>
+                        <span style="font-size:9px; color:var(--gray);">2 jam yang lalu</span>
+                    </div>
+                </div>
+                <p class="post-content">Hari ini terasa sangat berat di kantor, tapi aku mencoba untuk tetap tarik napas dalam-dalam seperti yang diajarkan Senara. Ternyata membantu banget buat tetap tenang. Semangat buat kalian semua!</p>
+                <div class="post-footer">
+                    <span class="action-item"><i class="far fa-heart"></i> 42</span>
+                    <span class="action-item"><i class="far fa-comment"></i> 12 Balasan</span>
+                </div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="avatar-anon" style="background: rgba(54, 209, 220, 0.1); color: var(--accent);"><i class="fas fa-seedling"></i></div>
+                    <div>
+                        <h6 style="margin:0; font-size:12px;">Sobat Damai</h6>
+                        <span style="font-size:9px; color:var(--gray);">5 jam yang lalu</span>
+                    </div>
+                </div>
+                <p class="post-content">Rekomendasi dong, lagu apa yang enak didengerin pas lagi cemas banget? Butuh yang bener-bener bikin adem.</p>
+                <div class="post-footer">
+                    <span class="action-item"><i class="far fa-heart"></i> 15</span>
+                    <span class="action-item"><i class="far fa-comment"></i> 28 Balasan</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="fab" onclick="alert('Fitur menulis postingan akan segera hadir!')">
+            <i class="fas fa-plus fa-lg"></i>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="chat.html" class="nav-item"><i class="fas fa-comment-dots"></i><span>Chat</span></a>
+            <a href="relax.html" class="nav-item"><i class="fas fa-spa"></i><span>Relax</span></a>
+            <a href="komunitas.html" class="nav-item active"><i class="fas fa-users"></i><span>Forum</span></a>
+            <a href="profil.html" class="nav-item"><i class="fas fa-user"></i><span>Profil</span></a>
+        </nav>
+    </div>
+
+    <script>
+        // Script untuk ganti tab kategori
+        document.querySelectorAll('.cat-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
