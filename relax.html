@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindMate - Relaksasi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Gaya khusus agar animasi berjalan sempurna */
+        .relax-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #text-guide {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 50px;
+            transition: all 0.5s ease;
+        }
+
+        .circle-container {
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Lingkaran yang membesar dan mengecil */
+        .breathe-circle {
+            width: 150px;
+            height: 150px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+            animation: breatheAction 8s infinite ease-in-out;
+        }
+
+        @keyframes breatheAction {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.6); }
+        }
+
+        .tip-box {
+            margin-top: 50px;
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="top-bar">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h5 style="margin: 0;">Relaksasi Napas</h5>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div class="content">
+            <div class="relax-container">
+                <div id="text-guide">Tarik Napas...</div>
+
+                <div class="circle-container">
+                    <div class="breathe-circle">
+                        <i class="fas fa-leaf fa-3x"></i>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <p style="font-size: 12px; color: var(--gray);">Ikuti gerakan lingkaran untuk menenangkan pikiranmu.</p>
+                </div>
+                
+                <button onclick="window.location.href='index.html'" style="margin-top: 20px; background: none; border: none; color: var(--primary); font-weight: 600; cursor: pointer;">Selesai</button>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="chat.html" class="nav-item"><i class="fas fa-comment-dots"></i><span>Chat</span></a>
+            <a href="relax.html" class="nav-item active"><i class="fas fa-spa"></i><span>Relax</span></a>
+            <a href="komunitas.html" class="nav-item"><i class="fas fa-users"></i><span>Forum</span></a>
+            <a href="profil.html" class="nav-item"><i class="fas fa-user"></i><span>Profil</span></a>
+        </nav>
+    </div>
+
+    <script>
+        const guide = document.getElementById('text-guide');
+        function startBreathing() {
+            guide.innerText = "Tarik Napas...";
+            setTimeout(() => {
+                guide.innerText = "Hembuskan Napas...";
+            }, 4000);
+        }
+        startBreathing();
+        setInterval(startBreathing, 8000);
+    </script>
+</body>
+</html>
